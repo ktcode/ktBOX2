@@ -5,13 +5,12 @@
 
 A = 1;
 B = 1;
-C = 1;
-D = 1;
-E = 1;
+
 
 
 gap1 = 0.001;
 gap2 = 0.002;
+panel_thick = 1;
 
 
 
@@ -26,20 +25,67 @@ difference()
 {
     union()
     {
+        //wall
+        translate( [-1.5, -1.5, 11] )
+        cube( [143, 43, panel_thick] );
+        translate( [-1.5, -1.5, -1.5] )
+        cube( [143, panel_thick, 13.5] );
+        translate( [-1.5, 40.5, -1.5] )
+        cube( [143, panel_thick, 13.5] );
+        translate( [-1.5, -1.5, -1.5] )
+        cube( [panel_thick, 43, 13.5] );
+        translate( [140.5, -1.5, -1.5] )
+        cube( [panel_thick, 43, 13.5] );
+        translate( [109, -1.5, 0] )
+        cube( [panel_thick, 43, 12] );
+        
+        //side
         translate( [-1.5, -1.5, 0] )
-        cube( [9, 43, 15.5] );
+        cube( [9.27, 43, 12] );
+        translate( [132.23, -1.5, 0] )
+        cube( [9.27, 43, 12] );
     }
-    translate( [-1.5-gap1, 8, -gap1] )
-    cube( [8.5, 24, 15.5+gap2] );
-    translate( [10+gap1, -1.5, 3] )
-    rotate( [33, 0, 180] )
-    cube( [11.5+gap2, 10, 16] );
-    translate( [-1.5-gap1, 40+1.5, 3] )
-    rotate( [33, 0, 0] )
-    cube( [11.5+gap2, 10, 16] );
-    
     screw_hole( 2.5, 2.5 );
     screw_hole( 2.5, 40-2.5 );
+    screw_hole( 140-2.5, 2.5 );
+    screw_hole( 140-2.5, 40-2.5 );
+    
+    //left
+    translate( [-1.5-gap1, 8, -1.5-gap1] )
+    cube( [8.5, 24, 9] );
+    translate( [3, 8, -1.5+gap1] )
+    cube( [4, 24, 13.5] );
+    
+    //right
+    translate( [133+gap1, 8, -1.5-gap1] )
+    cube( [8.5, 24, 9] );
+    translate( [133, 8, -1.5+gap1] )
+    cube( [4, 24, 13.5] );
+    
+    //front
+    translate( [2.69+2.54*3, -2, -1.5-gap1] )
+    cube( [2.54*38, 2, 9] );
+    translate( [140-23+1, -1.5-gap1, -1.5-gap1] )
+    cube( [14+gap1, 3+gap2, 4.5] );
+    
+    //relay
+    translate( [8.5-1.5+6+6/2, 2.22+2.54*7+2.54/2, 12] ){
+        cube( [5+1, 20+1, 3], center=true );
+        translate( [2.54*5*1, 0, 0] )
+        cube( [5+1, 20+1, 3], center=true );
+        translate( [2.54*5*2, 0, 0] )
+        cube( [5+1, 20+1, 3], center=true );
+        translate( [2.54*5*3, 0, 0] )
+        cube( [5+1, 20+1, 3], center=true );
+        translate( [2.54*5*4, 0, 0] )
+        cube( [5+1, 20+1, 3], center=true );
+        translate( [2.54*5*5, 0, 0] )
+        cube( [5+1, 20+1, 3], center=true );
+        translate( [2.54*5*6, 0, 0] )
+        cube( [5+1, 20+1, 3], center=true );
+        translate( [2.54*5*7, 0, 0] )
+        cube( [5+1, 20+1, 3], center=true );
+    }
 }
 }
 }
@@ -48,89 +94,42 @@ difference()
 
 if( B )
 {
-//color( "Blue" )
+//color( "Black" )
 {
-    translate( [5.08, 9.84, 0] )
+    translate( [0, 50, 0] )
     {
         difference()
         {
             union()
             {
-                relay_base( 2.54*6*0, 0 );
-                relay_base( 2.54*5*1, 0 );
-                relay_base( 2.54*5*2, 0 );
-                relay_base( 2.54*5*3, 0 );
-                relay_base( 2.54*5*4, 0 );
-                relay_base( 2.54*5*5, 0 );
-                relay_base( 2.54*5*6, 0 );
-                relay_base( 2.54*5*7, 0 );
+                //base
+                translate( [-1.5, -1.5, 0] )
+                cube( [143, 43, 4] );
             }
-            translate( [-gap1, -gap1, -gap1] )
-            cube( [2.54+gap2, 22+gap2, 4+gap2] );
+            rear_screw_hole( 2.5, 2.5 );
+            rear_screw_hole( 2.5, 40-2.5 );
+            rear_screw_hole( 140-2.5, 2.5 );
+            rear_screw_hole( 140-2.5, 40-2.5 );
+            
+            //port
+            translate( [2.69+2.54*1, 20, 2] )
+            cube( [4, 22, 4+gap2], center=true );
+            translate( [140-2.69-2.54*1, 20, 2] )
+            cube( [4, 22, 4+gap2], center=true );
+            
+            translate( [2.69-1, 20, 2.5] )
+            cube( [4, 22, 3+gap2], center=true );
+            translate( [140-2.69+1, 20, 2.5] )
+            cube( [4, 22, 3+gap2], center=true );
+            
+            //all
+            translate( [70, 20, 2.5] )
+            cube( [123, 40, 3+gap2], center=true );
         }
     }
 }
 }
 
-
-
-if( C )
-{
-//color( "Blue" )
-{
-translate( [140, 0, 0] )
-{
-difference()
-{
-    union()
-    {
-        translate( [-31, -1.5, 0] )
-        cube( [23, 43, 12] );
-    }
-    translate( [-31+1, 4.85+1, -gap1] )
-    cube( [10, 30.3-2, 12-1] );
-    translate( [-23+1, -1.5+1, -gap1] )
-    cube( [13, 43-2, 12-1] );
-
-    translate( [-23+1, -1.5-gap1, -gap1] )
-    cube( [14+gap1, 3+gap2, 3] );
-    
-    screw_hole( -25.5, 2.5 );
-    screw_hole( -25.5, 40-2.5 );
-}
-}
-}
-}
-
-
-
-if( D ){
-//color( "Blue" )
-{
-translate( [140, 0, 0] )
-{
-difference()
-{
-    union()
-    {
-        translate( [-7.5, -1.5, 0] )
-        cube( [9, 43, 15.5] );
-    }
-    translate( [-8.5+1.5+gap1, 8, -gap1] )
-    cube( [8.5, 24, 15.5+gap2] );
-    translate( [1.5+gap1, -1.5, 3] )
-    rotate( [33, 0, 180] )
-    cube( [11.5+gap2, 10, 16] );
-    translate( [-10-gap1, 40+1.5, 3] )
-    rotate( [33, 0, 0] )
-    cube( [11.5+gap2, 10, 16] );
-    
-    screw_hole( -2.5, 2.5 );
-    screw_hole( -2.5, 40-2.5 );
-}
-}
-}
-}
 
 
 
@@ -150,26 +149,15 @@ module screw_hole( x, y, z=0 )
 
 
 
-module relay_base( x, y, z=0 )
+module rear_screw_hole( x, y, z=0 )
 {
     translate( [x, y, z] )
     {
-        difference()
-        {
-            union()
-            {
-                cube( [12.7, 20.32, 4] );
-            }
-            translate( [12.7-2.54-(3+1)/2, 2.54-(3+1)/2, -gap1] )
-            {
-                cube( [3+1, 3+1, 4+gap2] );
-                translate( [0, 2.54*2, 0] )
-                cube( [3+1, 3+1, 4+gap2] );
-                translate( [0, 2.54*4, 0] )
-                cube( [3+1, 3+1, 4+gap2] );
-                translate( [0, 2.54*6, 0] )
-                cube( [3+1, 3+1, 4+gap2] );
-            }
-        }
+        translate( [0, 0, 3] )
+        cylinder( 5, 1.5, 1.5, $fn=30 );
+        translate( [0, 0, 2.2-gap1] )
+        cylinder( 0.8+gap2, 1.5+0.7, 1.5, $fn=30 );
+        translate( [0, 0, -gap1] )
+        cylinder( 2.2+gap1, 3.25+0.4, 3.25-0.6, $fn=30 );
     }
 }
